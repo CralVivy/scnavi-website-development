@@ -167,7 +167,7 @@ export default function FloorPlanBuilderPage() {
   return (
     <div className="flex flex-col h-[calc(100vh-7rem)] animate-fade">
       {/* ── Header ─────────────────────────────────────── */}
-      <div className="flex items-center justify-between px-5 py-3 border-b border-outline-variant/30 bg-white shrink-0">
+      <div className="flex items-center justify-between px-5 py-3 border-b border-outline-variant/30 bg-surface-container-lowest shrink-0">
         <div className="flex items-center gap-4">
           <div>
             <h2 className="font-headline font-semibold text-xl text-on-surface">
@@ -251,7 +251,7 @@ export default function FloorPlanBuilderPage() {
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
               selectedTool === tool.id
                 ? "bg-primary text-white shadow-md"
-                : "bg-white text-on-surface-variant border border-outline-variant/30 hover:border-primary/40"
+                : "bg-surface-container-lowest text-on-surface-variant border border-outline-variant/30 hover:border-primary/40"
             }`}
           >
             <span className="material-symbols-outlined text-[16px]">
@@ -297,7 +297,7 @@ export default function FloorPlanBuilderPage() {
         </div>
 
         {/* Properties Panel */}
-        <aside className="w-72 bg-white border-l border-outline-variant/30 flex flex-col overflow-y-auto">
+        <aside className="w-72 bg-surface-container-lowest border-l border-outline-variant/30 flex flex-col overflow-y-auto">
           <div className="px-4 py-3 border-b border-outline-variant/30 bg-surface-container/30">
             <p className="font-bold text-sm text-on-surface">Properties</p>
           </div>

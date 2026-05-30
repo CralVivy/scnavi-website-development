@@ -67,7 +67,7 @@ export default function AdminFeedbackPage() {
       {/* Filter tabs */}
       <div className="flex gap-2">
         {(["all", "pending", "reviewed"] as const).map((f) => (
-          <button key={f} onClick={() => setFilter(f)} className={`px-4 py-1.5 rounded-full text-sm font-semibold border transition-all capitalize ${filter === f ? "bg-primary text-white border-primary" : "bg-white border-outline-variant/30 text-on-surface-variant hover:border-primary/40"}`}>
+          <button key={f} onClick={() => setFilter(f)} className={`px-4 py-1.5 rounded-full text-sm font-semibold border transition-all capitalize ${filter === f ? "bg-primary text-white border-primary" : "bg-surface-container-lowest border-outline-variant/30 text-on-surface-variant hover:border-primary/40"}`}>
             {f}
           </button>
         ))}

@@ -116,7 +116,7 @@ export default function AdminSchedulesPage() {
               </button>
 
               {expandedCourse === course && (
-                <div className="p-4 border-t border-outline-variant/30 space-y-6 bg-white">
+                <div className="p-4 border-t border-outline-variant/30 space-y-6 bg-surface-container-lowest">
                   {schedulesByCourse[course].map((userSchedule) => (
                     <div key={userSchedule.uid} className="space-y-3">
                       <h4 className="font-bold text-sm text-on-surface border-b border-outline-variant/20 pb-2">
@@ -133,7 +133,7 @@ export default function AdminSchedulesPage() {
                                 <p className={`font-bold text-xs truncate ${color.text}`}>{entry.subject}</p>
                                 <div className="flex items-center justify-between text-[10px] text-outline mt-1">
                                   <span className="flex items-center gap-1"><span className="material-symbols-outlined text-[12px]">schedule</span>{entry.time}</span>
-                                  <span className="font-medium bg-white/50 px-1.5 py-0.5 rounded">{entry.days}</span>
+                                  <span className="font-medium bg-surface-container-lowest/50 px-1.5 py-0.5 rounded">{entry.days}</span>
                                 </div>
                                 <div className="flex items-center justify-between text-[10px] text-outline">
                                   <span className="flex items-center gap-1 truncate"><span className="material-symbols-outlined text-[12px]">person</span>{entry.instructor}</span>

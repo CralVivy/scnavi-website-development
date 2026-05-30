@@ -2,12 +2,14 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
+import { LandingHeaderAuth } from "@/components/layout/LandingHeaderAuth";
+import { LandingHeroCTA } from "@/components/layout/LandingHeroCTA";
 
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-surface flex flex-col relative overflow-hidden">
       {/* Top Navigation */}
-      <header className="w-full bg-white/80 backdrop-blur-md border-b border-outline-variant/30 sticky top-0 z-50 transition-all">
+      <header className="w-full bg-surface-container-lowest/80 backdrop-blur-md border-b border-outline-variant/30 sticky top-0 z-50 transition-all">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
             <span className="material-symbols-outlined ms-fill text-primary text-[32px]">
@@ -22,14 +24,7 @@ export default function LandingPage() {
             <Link href="#solutions" className="hover:text-primary transition-colors">Solutions</Link>
             <Link href="/admin/login" className="hover:text-primary transition-colors">Admin Portal</Link>
           </nav>
-          <div className="flex items-center gap-2 sm:gap-4">
-            <Link href="/login">
-              <Button variant="ghost" className="text-sm sm:text-base">Log In</Button>
-            </Link>
-            <Link href="/register">
-              <Button className="text-sm sm:text-base">Get Started</Button>
-            </Link>
-          </div>
+          <LandingHeaderAuth />
         </div>
       </header>
 
@@ -46,12 +41,12 @@ export default function LandingPage() {
               priority
             />
             {/* Light gradient overlay — white wash fading to surface */}
-            <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/75 to-surface/95"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-surface-container-lowest/90 via-surface-container-lowest/75 to-surface/95"></div>
           </div>
 
           <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center">
             {/* Light Glassmorphism Container */}
-            <div className="bg-white/70 backdrop-blur-xl border border-white/50 p-8 md:p-14 rounded-[32px] shadow-2xl flex flex-col items-center">
+            <div className="bg-surface-container-lowest/70 backdrop-blur-xl border border-outline-variant/30 p-8 md:p-14 rounded-[32px] shadow-2xl flex flex-col items-center">
               <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-accent/10 border border-accent/20 font-bold text-sm mb-8">
                 <span className="material-symbols-outlined text-[18px] text-accent">new_releases</span>
                 <span className="text-primary">Introducing</span>
@@ -68,18 +63,7 @@ export default function LandingPage() {
                 The smart campus navigation system designed to help you find rooms, avoid schedule conflicts, and stay updated with real-time campus events.
               </p>
               
-              <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
-                <Link href="/register" className="w-full sm:w-auto">
-                  <Button size="lg" className="w-full sm:w-auto shadow-xl shadow-primary/20 text-lg px-8">
-                    Create an Account
-                  </Button>
-                </Link>
-                <Link href="/login" className="w-full sm:w-auto">
-                  <Button variant="outline" size="lg" className="w-full sm:w-auto bg-white">
-                    Student Login
-                  </Button>
-                </Link>
-              </div>
+              <LandingHeroCTA />
             </div>
           </div>
         </section>
@@ -89,7 +73,7 @@ export default function LandingPage() {
           <div className="w-full aspect-video bg-surface-container-low rounded-3xl border border-outline-variant/30 shadow-2xl overflow-hidden flex items-center justify-center relative">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5"></div>
             {/* Minimal mockup representation */}
-            <div className="w-3/4 h-3/4 bg-white rounded-xl shadow-card border border-outline-variant/20 flex flex-col overflow-hidden relative z-10">
+            <div className="w-3/4 h-3/4 bg-surface-container-lowest rounded-xl shadow-card border border-outline-variant/20 flex flex-col overflow-hidden relative z-10">
               <div className="h-12 border-b border-outline-variant/20 flex items-center px-4 gap-2">
                 <div className="w-3 h-3 rounded-full bg-room-red"></div>
                 <div className="w-3 h-3 rounded-full bg-room-yellow"></div>
@@ -110,7 +94,7 @@ export default function LandingPage() {
         </section>
 
         {/* Feature Highlights */}
-        <section id="features" className="w-full bg-white py-24 border-t border-outline-variant/20">
+        <section id="features" className="w-full bg-surface-container-lowest py-24 border-t border-outline-variant/20">
           <div className="max-w-7xl mx-auto px-6">
             <div className="text-center mb-16">
               <h2 className="font-headline font-bold text-[36px] md:text-[48px] text-on-surface">Everything you need, in one place.</h2>

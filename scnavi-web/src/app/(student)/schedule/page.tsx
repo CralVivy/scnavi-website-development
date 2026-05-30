@@ -191,7 +191,7 @@ export default function SchedulePage() {
         )}
 
         {/* AI Status banner */}
-        <div className="mt-4 flex items-center gap-2 px-3 py-2 bg-white/60 dark:bg-surface-container/60 rounded-xl border border-outline-variant/20">
+        <div className="mt-4 flex items-center gap-2 px-3 py-2 bg-surface-container-lowest/60 dark:bg-surface-container/60 rounded-xl border border-outline-variant/20">
           <span className="material-symbols-outlined text-[16px] text-on-surface-variant">info</span>
           <p className="text-xs text-on-surface-variant">
             <strong>AI Powered:</strong> Using Gemini 2.5 Flash to securely extract your schedule.
@@ -211,7 +211,7 @@ export default function SchedulePage() {
                   <button 
                     key={v} 
                     onClick={() => setView(v)} 
-                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all capitalize flex items-center gap-1.5 ${view === v ? "bg-white shadow text-on-surface" : "text-outline hover:text-on-surface"}`}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all capitalize flex items-center gap-1.5 ${view === v ? "bg-surface-container-lowest shadow text-on-surface" : "text-outline hover:text-on-surface"}`}
                   >
                     <span className="material-symbols-outlined text-[16px]">
                       {v === "daily" ? "today" : v === "overview" ? "menu_book" : "calendar_view_week"}

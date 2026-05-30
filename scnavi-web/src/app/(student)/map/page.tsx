@@ -113,7 +113,7 @@ export default function MapPage() {
         </div>
         <div className="flex bg-surface-container rounded-xl p-1 gap-1">
           {(["map", "list"] as const).map((v) => (
-            <button key={v} onClick={() => setViewMode(v)} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all capitalize ${viewMode === v ? "bg-white shadow text-on-surface" : "text-outline hover:text-on-surface"}`}>
+            <button key={v} onClick={() => setViewMode(v)} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all capitalize ${viewMode === v ? "bg-surface-container-lowest shadow text-on-surface" : "text-outline hover:text-on-surface"}`}>
               <span className="material-symbols-outlined text-[16px]">{v === "map" ? "map" : "view_list"}</span>
               {v.charAt(0).toUpperCase() + v.slice(1)}
             </button>
@@ -152,7 +152,7 @@ export default function MapPage() {
             </APIProvider>
 
             {/* Map legend */}
-            <div className="absolute bottom-4 left-4 bg-white/90 dark:bg-surface-container-lowest/90 backdrop-blur-sm border border-outline-variant/20 rounded-xl px-3 py-2 shadow-md flex gap-3">
+            <div className="absolute bottom-4 left-4 bg-surface-container-lowest/90 backdrop-blur-sm border border-outline-variant/20 rounded-xl px-3 py-2 shadow-md flex gap-3">
               <span className="flex items-center gap-1.5 text-xs text-on-surface font-medium">
                 <span className="w-2.5 h-2.5 rounded-full bg-accent shrink-0" />Building
               </span>
@@ -246,7 +246,7 @@ export default function MapPage() {
                         <div key={room.id} className="flex items-center gap-3 p-3 rounded-xl border border-outline-variant/20 hover:border-primary/30 hover:bg-surface-container/50 transition-all cursor-pointer">
                           <div className="relative w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center shrink-0">
                             <span className="material-symbols-outlined text-[20px] text-on-surface-variant">meeting_room</span>
-                            <span className={`absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full border-2 border-white ${cfg.dot}`} />
+                            <span className={`absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full border-2 border-surface-container-lowest ${cfg.dot}`} />
                           </div>
                           <div className="flex-1 min-w-0">
                             <p className="font-semibold text-sm text-on-surface">{room.name}</p>

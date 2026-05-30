@@ -77,7 +77,7 @@ export default function AdminMapEditor() {
   if (!apiKey) return <div className="p-6">Map API Key missing.</div>;
 
   return (
-    <div className="flex flex-col h-[calc(100vh-7rem)] min-h-[500px] bg-white rounded-2xl overflow-hidden border border-outline-variant/30 shadow-sm animate-fade">
+    <div className="flex flex-col h-[calc(100vh-7rem)] min-h-[500px] bg-surface-container-lowest rounded-2xl overflow-hidden border border-outline-variant/30 shadow-sm animate-fade">
       <div className="p-5 border-b border-outline-variant/30 bg-surface-container/30 flex justify-between items-center">
         <div>
           <h2 className="font-headline font-semibold text-xl text-on-surface">Campus Map Editor</h2>
@@ -85,7 +85,7 @@ export default function AdminMapEditor() {
         </div>
         
         {newMarker && (
-          <div className="flex items-center gap-3 bg-white p-2 rounded-xl shadow-sm border border-outline-variant/30">
+          <div className="flex items-center gap-3 bg-surface-container-lowest p-2 rounded-xl shadow-sm border border-outline-variant/30">
             <input 
               type="text" 
               placeholder="Building Name..." 

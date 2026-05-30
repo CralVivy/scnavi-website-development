@@ -68,8 +68,8 @@ export default function EventsPage() {
             onClick={() => setFilter(cat)}
             className={`px-4 py-1.5 rounded-full text-sm font-semibold transition-all border ${
               filter === cat
-                ? "bg-primary text-white border-primary shadow-md"
-                : "bg-white dark:bg-surface-container border-outline-variant/30 text-on-surface-variant hover:border-primary/40 hover:text-primary"
+                ? "bg-primary text-white border-primary shadow-md shadow-primary/20"
+                : "bg-surface-container-lowest dark:bg-surface-container border-outline-variant/30 text-on-surface-variant hover:border-primary/40 hover:text-primary"
             }`}
           >
             {cat}

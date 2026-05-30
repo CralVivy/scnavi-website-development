@@ -140,7 +140,7 @@ export default function RegisterPage() {
     <div className="min-h-screen bg-surface flex flex-col items-center justify-center p-6 relative overflow-hidden">
       <div className="absolute inset-0 z-0 bg-primary/5"></div>
       
-      <div className="w-full max-w-md bg-white rounded-3xl shadow-card border border-outline-variant/30 p-8 sm:p-10 relative z-10 animate-fade">
+      <div className="w-full max-w-md bg-surface-container-lowest rounded-3xl shadow-card border border-outline-variant/30 p-8 sm:p-10 relative z-10 animate-fade">
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center gap-2 mb-2 hover:opacity-80 transition-opacity">
             <span className="material-symbols-outlined ms-fill text-primary text-[32px]">explore</span>
@@ -222,7 +222,7 @@ export default function RegisterPage() {
             <span className="w-full border-t border-outline-variant/30"></span>
           </div>
           <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-white px-2 text-outline font-semibold">Or continue with</span>
+            <span className="bg-surface-container-lowest px-2 text-outline font-semibold">Or continue with</span>
           </div>
         </div>
 

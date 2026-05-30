@@ -119,7 +119,7 @@ export default function StudentLoginPage() {
             priority
           />
           {/* Light gradient overlay — white wash fading to surface */}
-          <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/75 to-surface/95 dark:from-surface-container-low/90 dark:via-surface-container-low/75 dark:to-surface/95"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-surface-container-lowest/90 via-surface-container-lowest/75 to-surface/95 dark:from-surface-container-low/90 dark:via-surface-container-low/75 dark:to-surface/95"></div>
         </div>
         
         <Link href="/" className="relative z-10 flex items-center gap-2 hover:opacity-80 transition-opacity w-fit">

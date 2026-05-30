@@ -81,7 +81,7 @@ export default function AdminConflictsPage() {
         <button 
           onClick={fetchConflicts} 
           disabled={loading}
-          className="flex items-center gap-2 px-4 py-2 bg-white border border-outline-variant/30 rounded-xl text-sm font-semibold text-on-surface hover:bg-surface-container transition-colors shadow-sm disabled:opacity-50"
+          className="flex items-center gap-2 px-4 py-2 bg-surface-container-lowest border border-outline-variant/30 rounded-xl text-sm font-semibold text-on-surface hover:bg-surface-container transition-colors shadow-sm disabled:opacity-50"
         >
           <span className="material-symbols-outlined text-[18px]">refresh</span> Refresh
         </button>

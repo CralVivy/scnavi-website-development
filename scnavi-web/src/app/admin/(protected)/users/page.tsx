@@ -74,8 +74,8 @@ export default function AdminUsersPage() {
           <h2 className="font-headline font-semibold text-2xl text-on-surface">User Management</h2>
           <p className="text-sm text-outline">Promote students to administrators via Custom Claims</p>
         </div>
-        <button onClick={fetchUsers} className="flex items-center gap-2 px-4 py-2 bg-white border border-outline-variant/30 rounded-xl text-sm font-semibold text-on-surface hover:bg-surface-container transition-colors shadow-sm">
-          <span className="material-symbols-outlined text-[18px]">refresh</span> Refresh
+        <button onClick={fetchUsers} className="flex items-center gap-2 px-4 py-2 bg-surface-container-lowest border border-outline-variant/30 rounded-xl text-sm font-semibold text-on-surface hover:bg-surface-container transition-colors shadow-sm">
+          <span className={`material-symbols-outlined text-[20px] ${loading ? 'animate-spin' : ''}`}>refresh</span> Refresh
         </button>
       </div>
 
@@ -85,7 +85,7 @@ export default function AdminUsersPage() {
         </div>
       )}
 
-      <div className="bg-white border border-outline-variant/30 rounded-2xl overflow-hidden shadow-sm">
+      <div className="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl overflow-hidden shadow-sm">
         <table className="w-full text-left text-sm">
           <thead className="bg-surface-container border-b border-outline-variant/30 text-outline uppercase font-semibold text-[11px] tracking-wider">
             <tr>
