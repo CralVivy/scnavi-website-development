@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-primary: #0A84FF;
+  --color-primary-dark: #005db8;
+  --color-accent: #FF9500;
+  
+  --color-surface: #f9f9fb;
+  --color-surface-admin: #f3f4f6;
+  --color-surface-container: #eeeef0;
+  --color-surface-container-low: #f3f3f5;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-high: #e8e8ea;
+  
+  --color-on-surface: #1a1c1d;
+  --color-on-surface-variant: #414754;
+  --color-outline: #717786;
+  --color-outline-variant: #c0c6d6;
+  --color-inactive: #8E8E93;
+  
+  --color-room-red: #FF3B30;
+  --color-room-green: #34C759;
+  --color-room-yellow: #FFD60A;
+  
+  --color-sidebar: #0f172a;
+  --color-sidebar-active: #1e293b;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-headline: var(--font-newsreader), ui-serif, Georgia, serif;
+}
+
+/* Base styles to replicate the html templates */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  overscroll-behavior: none;
+}
+
+/* Utilities not strictly available by default */
+@utility hide-scrollbar {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@utility shadow-card {
+  box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+}
+
+/* Dark mode overrides via .dark class on <html> */
+.dark {
+  --color-surface: #111318;
+  --color-surface-container: #1d1f25;
+  --color-surface-container-low: #191b21;
+  --color-surface-container-lowest: #0c0e13;
+  --color-surface-container-high: #272a31;
+  --color-on-surface: #e2e2e9;
+  --color-on-surface-variant: #c4c6d0;
+  --color-outline: #8e909a;
+  --color-outline-variant: #44474e;
+  --color-inactive: #636366;
+}
+
+@utility animate-slide-in {
+  animation: slideIn 0.2s ease-out;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@utility animate-fade {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
