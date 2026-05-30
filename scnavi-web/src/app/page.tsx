@@ -9,25 +9,25 @@ export default function LandingPage() {
       {/* Top Navigation */}
       <header className="w-full bg-white/80 backdrop-blur-md border-b border-outline-variant/30 sticky top-0 z-50 transition-all">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
             <span className="material-symbols-outlined ms-fill text-primary text-[32px]">
               explore
             </span>
             <span className="font-headline font-bold text-on-surface text-[26px] tracking-tight">
               SCNavi
             </span>
-          </div>
+          </Link>
           <nav className="hidden md:flex items-center gap-8 font-medium text-on-surface-variant">
             <Link href="#features" className="hover:text-primary transition-colors">Features</Link>
             <Link href="#solutions" className="hover:text-primary transition-colors">Solutions</Link>
             <Link href="/admin/login" className="hover:text-primary transition-colors">Admin Portal</Link>
           </nav>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <Link href="/login">
-              <Button variant="ghost">Log In</Button>
+              <Button variant="ghost" className="text-sm sm:text-base">Log In</Button>
             </Link>
             <Link href="/register">
-              <Button>Get Started</Button>
+              <Button className="text-sm sm:text-base">Get Started</Button>
             </Link>
           </div>
         </div>
@@ -59,7 +59,7 @@ export default function LandingPage() {
                 <span className="text-on-surface-variant">for Bicol University</span>
               </div>
               
-              <h1 className="font-headline font-extrabold text-[48px] md:text-[72px] leading-[1.1] tracking-tight mb-8">
+              <h1 className="font-headline font-extrabold text-[36px] sm:text-[48px] md:text-[72px] leading-[1.1] tracking-tight mb-8">
                 <span className="text-primary">Navigate Your Campus</span> <br className="hidden md:block" />
                 <span className="text-accent">With Intelligence.</span>
               </h1>

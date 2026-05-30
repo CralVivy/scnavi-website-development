@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
@@ -105,18 +106,26 @@ export default function StudentLoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex">
+    <div className="min-h-screen bg-surface-container-lowest flex">
       {/* Left half: Branding / Hero */}
       <div className="hidden lg:flex w-1/2 bg-surface-container-low flex-col justify-between p-12 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/5"></div>
+        {/* Background Image & Light/Dark Overlay */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <Image 
+            src="/images/bicol-u-bg.png"
+            alt="Bicol University Campus"
+            fill
+            className="object-cover object-center"
+            priority
+          />
+          {/* Light gradient overlay — white wash fading to surface */}
+          <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/75 to-surface/95 dark:from-surface-container-low/90 dark:via-surface-container-low/75 dark:to-surface/95"></div>
+        </div>
         
-        {/* Abstract Campus Map Pattern */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] opacity-20 pointer-events-none" style={{ backgroundImage: "radial-gradient(#0A84FF 2px, transparent 2px)", backgroundSize: "40px 40px" }}></div>
- 
-        <div className="relative z-10 flex items-center gap-2">
+        <Link href="/" className="relative z-10 flex items-center gap-2 hover:opacity-80 transition-opacity w-fit">
           <span className="material-symbols-outlined ms-fill text-primary text-[32px]">explore</span>
           <span className="font-headline font-bold text-on-surface text-[24px]">SCNavi</span>
-        </div>
+        </Link>
  
         <div className="relative z-10 max-w-md">
           <h1 className="font-headline font-bold text-[48px] leading-tight text-on-surface mb-6">
@@ -135,10 +144,10 @@ export default function StudentLoginPage() {
       {/* Right half: Login Form */}
       <div className="w-full lg:w-1/2 flex items-center justify-center p-8 sm:p-12">
         <div className="w-full max-w-md flex flex-col">
-          <div className="lg:hidden flex items-center gap-2 mb-12">
+          <Link href="/" className="lg:hidden flex items-center gap-2 mb-12 hover:opacity-80 transition-opacity w-fit">
             <span className="material-symbols-outlined ms-fill text-primary text-[32px]">explore</span>
             <span className="font-headline font-bold text-on-surface text-[24px]">SCNavi</span>
-          </div>
+          </Link>
  
           <h2 className="text-[32px] font-bold text-on-surface tracking-tight mb-2">Sign in</h2>
           <p className="text-on-surface-variant mb-10">Use your university email to access the portal.</p>
@@ -185,7 +194,7 @@ export default function StudentLoginPage() {
               <span className="w-full border-t border-outline-variant/30"></span>
             </div>
             <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-white px-2 text-outline font-semibold">Or continue with</span>
+              <span className="bg-surface-container-lowest px-2 text-outline font-semibold">Or continue with</span>
             </div>
           </div>
 

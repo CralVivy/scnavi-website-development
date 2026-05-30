@@ -5,8 +5,12 @@ import { usePathname, useRouter } from "next/navigation";
 import { auth } from "@/lib/firebase";
 import { signOut } from "firebase/auth";
 
+interface AdminSidebarProps {
+  mobileOpen?: boolean;
+  onClose?: () => void;
+}
 
-export function AdminSidebar() {
+export function AdminSidebar({ mobileOpen = false, onClose }: AdminSidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
   const [collapsed, setCollapsed] = useState(false);
@@ -29,78 +33,99 @@ export function AdminSidebar() {
   ];
 
   return (
-    <aside
-      className={`bg-sidebar text-slate-400 flex flex-col h-screen sticky top-0 overflow-y-auto hide-scrollbar transition-all duration-300 ${
-        collapsed ? "w-20" : "w-64"
-      }`}
-    >
-      <div className="p-5 border-b border-white/5 flex items-center justify-between">
-        <Link href="/admin/dashboard" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-          <span className="material-symbols-outlined ms-fill text-primary text-[28px]">
-            explore
-          </span>
-          {!collapsed && (
-            <div>
-              <span className="font-headline font-bold text-white text-[22px] leading-none block">
-                SCNavi
-              </span>
-              <span className="text-[11px] text-slate-500 uppercase tracking-widest block">
-                Admin Portal
-              </span>
+    <>
+      {/* Mobile Backdrop */}
+      {mobileOpen && (
+        <div 
+          className="fixed inset-0 bg-black/60 z-50 md:hidden animate-fade" 
+          onClick={onClose}
+        />
+      )}
+
+      <aside
+        className={`bg-sidebar text-slate-400 flex flex-col h-screen fixed md:sticky top-0 left-0 z-50 overflow-y-auto hide-scrollbar transition-all duration-300 ${
+          mobileOpen ? "translate-x-0 w-64" : "-translate-x-full md:translate-x-0"
+        } ${collapsed ? "md:w-20" : "md:w-64"}`}
+      >
+        <div className="p-5 border-b border-white/5 flex items-center justify-between">
+          <Link 
+            href="/admin/dashboard" 
+            onClick={onClose}
+            className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+          >
+            <span className="material-symbols-outlined ms-fill text-primary text-[28px]">
+              explore
+            </span>
+            {(!collapsed || mobileOpen) && (
+              <div>
+                <span className="font-headline font-bold text-white text-[22px] leading-none block">
+                  SCNavi
+                </span>
+                <span className="text-[11px] text-slate-500 uppercase tracking-widest block">
+                  Admin Portal
+                </span>
+              </div>
+            )}
+          </Link>
+          <button
+            onClick={() => {
+              if (onClose) {
+                onClose();
+              } else {
+                setCollapsed(!collapsed);
+              }
+            }}
+            className="text-slate-500 hover:text-white"
+          >
+            <span className="material-symbols-outlined">
+              {onClose ? "close" : (collapsed ? "menu" : "menu_open")}
+            </span>
+          </button>
+        </div>
+
+        <nav className="flex-1 p-3 space-y-1">
+          {navItems.map((item) => {
+            const isActive = pathname === item.href;
+            return (
+              <Link
+                key={item.name}
+                href={item.href}
+                onClick={onClose}
+                className={`flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-colors ${
+                  isActive
+                    ? "bg-primary text-white"
+                    : "hover:bg-sidebar-active hover:text-slate-200"
+                }`}
+                title={(collapsed && !mobileOpen) ? item.name : undefined}
+              >
+                <span
+                  className={`material-symbols-outlined text-[20px] ${
+                    isActive ? "ms-fill" : ""
+                  }`}
+                >
+                  {item.icon}
+                </span>
+                {(!collapsed || mobileOpen) && <span>{item.name}</span>}
+              </Link>
+            );
+          })}
+        </nav>
+
+        <div className="p-3 border-t border-white/5">
+          <button onClick={handleSignOut} className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium w-full text-left hover:bg-sidebar-active hover:text-slate-200 transition-colors text-slate-400">
+            <span className="material-symbols-outlined text-[20px]">logout</span>
+            {(!collapsed || mobileOpen) && <span>Sign Out</span>}
+          </button>
+          {(!collapsed || mobileOpen) && (
+            <div className="px-4 pt-2 pb-1">
+              <p className="text-[11px] text-slate-500 truncate">
+                admin@bicol-u.edu.ph
+              </p>
+              <p className="text-[10px] text-slate-600">Super Admin</p>
             </div>
           )}
-        </Link>
-        <button
-          onClick={() => setCollapsed(!collapsed)}
-          className="text-slate-500 hover:text-white"
-        >
-          <span className="material-symbols-outlined">
-            {collapsed ? "menu" : "menu_open"}
-          </span>
-        </button>
-      </div>
-
-      <nav className="flex-1 p-3 space-y-1">
-        {navItems.map((item) => {
-          const isActive = pathname === item.href;
-          return (
-            <Link
-              key={item.name}
-              href={item.href}
-              className={`flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-colors ${
-                isActive
-                  ? "bg-primary text-white"
-                  : "hover:bg-sidebar-active hover:text-slate-200"
-              }`}
-              title={collapsed ? item.name : undefined}
-            >
-              <span
-                className={`material-symbols-outlined text-[20px] ${
-                  isActive ? "ms-fill" : ""
-                }`}
-              >
-                {item.icon}
-              </span>
-              {!collapsed && <span>{item.name}</span>}
-            </Link>
-          );
-        })}
-      </nav>
-
-      <div className="p-3 border-t border-white/5">
-        <button onClick={handleSignOut} className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium w-full text-left hover:bg-sidebar-active hover:text-slate-200 transition-colors text-slate-400">
-          <span className="material-symbols-outlined text-[20px]">logout</span>
-          {!collapsed && <span>Sign Out</span>}
-        </button>
-        {!collapsed && (
-          <div className="px-4 pt-2 pb-1">
-            <p className="text-[11px] text-slate-500 truncate">
-              admin@bicol-u.edu.ph
-            </p>
-            <p className="text-[10px] text-slate-600">Super Admin</p>
-          </div>
-        )}
-      </div>
-    </aside>
+        </div>
+      </aside>
+    </>
   );
 }

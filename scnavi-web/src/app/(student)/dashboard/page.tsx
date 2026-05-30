@@ -246,8 +246,8 @@ export default function StudentDashboardPage() {
               </div>
             </Card>
           ) : (
-            <Card className="flex items-start gap-5 bg-gradient-to-br from-white to-primary/5 dark:from-surface-container dark:to-primary/10 border border-primary/10 shadow-lg">
-              <div className="shrink-0 w-14 h-14 rounded-2xl bg-white dark:bg-surface-container-high shadow-sm border border-outline-variant/20 flex items-center justify-center mt-1">
+            <Card className="flex items-start gap-5 bg-gradient-to-br from-surface-container-lowest to-primary/5 dark:from-surface-container dark:to-primary/10 border border-primary/10 shadow-lg">
+              <div className="shrink-0 w-14 h-14 rounded-2xl bg-surface-container-lowest dark:bg-surface-container-high shadow-sm border border-outline-variant/20 flex items-center justify-center mt-1">
                 <span className="material-symbols-outlined ms-fill text-primary text-[30px]">schedule</span>
               </div>
               <div className="flex-grow">
@@ -338,33 +338,33 @@ export default function StudentDashboardPage() {
                 className="w-full flex items-center justify-between p-3 rounded-xl hover:bg-surface-container-low transition-colors text-left group border border-transparent hover:border-outline-variant/30"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-pink-50 text-pink-500 flex items-center justify-center">
+                  <div className="w-8 h-8 rounded-lg bg-pink-50 dark:bg-pink-500/10 text-pink-500 flex items-center justify-center">
                     <span className="material-symbols-outlined text-[20px]">rate_review</span>
                   </div>
                   <span className="text-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Submit Feedback</span>
                 </div>
                 <span className="material-symbols-outlined text-outline-variant text-[20px] group-hover:translate-x-1 transition-transform">chevron_right</span>
               </button>
-
+ 
               <a
                 href="/schedule"
                 className="w-full flex items-center justify-between p-3 rounded-xl hover:bg-surface-container-low transition-colors text-left group border border-transparent hover:border-outline-variant/30"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-sky-50 text-sky-500 flex items-center justify-center">
+                  <div className="w-8 h-8 rounded-lg bg-sky-50 dark:bg-sky-500/10 text-sky-500 flex items-center justify-center">
                     <span className="material-symbols-outlined text-[20px]">calendar_today</span>
                   </div>
                   <span className="text-sm font-semibold text-on-surface group-hover:text-primary transition-colors">My Schedule</span>
                 </div>
                 <span className="material-symbols-outlined text-outline-variant text-[20px] group-hover:translate-x-1 transition-transform">chevron_right</span>
               </a>
-
+ 
               <a
                 href="/events"
                 className="w-full flex items-center justify-between p-3 rounded-xl hover:bg-surface-container-low transition-colors text-left group border border-transparent hover:border-outline-variant/30"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-violet-50 text-violet-500 flex items-center justify-center">
+                  <div className="w-8 h-8 rounded-lg bg-violet-50 dark:bg-violet-500/10 text-violet-500 flex items-center justify-center">
                     <span className="material-symbols-outlined text-[20px]">event</span>
                   </div>
                   <span className="text-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Campus Events</span>

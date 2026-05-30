@@ -63,6 +63,9 @@ body {
   --color-outline: #8e909a;
   --color-outline-variant: #44474e;
   --color-inactive: #636366;
+  --color-sidebar: #080a0f;
+  --color-sidebar-active: #14171f;
+  --color-surface-admin: #111318;
 }
 
 @utility animate-slide-in {

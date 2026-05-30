@@ -7,6 +7,7 @@ import { onAuthStateChanged } from "firebase/auth";
 
 export default function AdminProtectedLayout({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -43,10 +44,19 @@ export default function AdminProtectedLayout({ children }: { children: React.Rea
 
   return (
     <div className="flex min-h-screen bg-surface-admin">
-      <AdminSidebar />
-      <main className="flex-1 overflow-y-auto">
-        <header className="bg-white border-b border-outline-variant/30 px-6 py-4 flex items-center justify-between sticky top-0 z-40">
-          <h2 className="font-semibold text-[18px] text-on-surface">Dashboard</h2>
+      <AdminSidebar mobileOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      <main className="flex-1 overflow-y-auto w-full">
+        <header className="bg-surface-container-lowest border-b border-outline-variant/30 px-4 md:px-6 py-4 flex items-center justify-between sticky top-0 z-40">
+          <div className="flex items-center gap-3">
+            <button 
+              onClick={() => setSidebarOpen(true)}
+              className="md:hidden w-9 h-9 rounded-lg flex items-center justify-center hover:bg-surface-container transition-colors text-on-surface shrink-0"
+              title="Open menu"
+            >
+              <span className="material-symbols-outlined text-[24px]">menu</span>
+            </button>
+            <h2 className="font-semibold text-[18px] text-on-surface">Dashboard</h2>
+          </div>
           <div className="flex items-center gap-4">
             <span className="text-[13px] text-outline font-medium">
               {new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
@@ -56,7 +66,7 @@ export default function AdminProtectedLayout({ children }: { children: React.Rea
             </div>
           </div>
         </header>
-        <div className="p-6">
+        <div className="p-4 md:p-6">
           {children}
         </div>
       </main>

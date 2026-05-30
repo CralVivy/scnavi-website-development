@@ -125,20 +125,20 @@ export function StudentNav({ collapsed, onToggle }: StudentNavProps) {
     <>
       {/* ── Desktop Sidebar ── */}
       <aside
-        className={`hidden md:flex flex-col bg-white dark:bg-surface-container-lowest border-r border-outline-variant/30 h-screen sticky top-0 transition-all duration-300 ${
+        className={`hidden md:flex flex-col bg-surface-container-lowest border-r border-outline-variant/30 h-screen sticky top-0 transition-all duration-300 ${
           collapsed ? "w-[68px]" : "w-60"
         }`}
       >
         {/* Logo + collapse toggle + profile */}
         <div className={`flex items-center border-b border-outline-variant/30 h-16 px-4 ${collapsed ? "justify-center" : "justify-between"}`}>
           {!collapsed && (
-            <Link href="/" className="flex items-center gap-2 overflow-hidden hover:opacity-80 transition-opacity">
+            <Link href="/dashboard" className="flex items-center gap-2 overflow-hidden hover:opacity-80 transition-opacity">
               <span className="material-symbols-outlined ms-fill text-primary text-[26px] shrink-0">explore</span>
               <span className="font-headline font-bold text-on-surface text-[20px] leading-none whitespace-nowrap">SCNavi</span>
             </Link>
           )}
           {collapsed && (
-            <Link href="/" className="hover:opacity-80 transition-opacity">
+            <Link href="/dashboard" className="hover:opacity-80 transition-opacity">
               <span className="material-symbols-outlined ms-fill text-primary text-[26px]">explore</span>
             </Link>
           )}
@@ -190,7 +190,7 @@ export function StudentNav({ collapsed, onToggle }: StudentNavProps) {
       </aside>
 
       {/* ── Mobile Bottom Nav ── */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-surface-container-lowest border-t border-outline-variant/30 flex items-center h-16 px-1">
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-surface-container-lowest border-t border-outline-variant/30 flex items-center h-16 px-1">
         {navItems.map((item) => {
           const isActive = pathname === item.href || (item.href !== "/dashboard" && pathname.startsWith(item.href));
           return (

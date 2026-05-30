@@ -130,8 +130,63 @@ export default function StudentLayout({ children }: { children: React.ReactNode 
     .join("")
     .toUpperCase();
 
+  const renderNotifDropdown = (isMobile = false) => (
+    <div className={`absolute right-0 top-12 ${isMobile ? "w-[calc(100vw-2rem)]" : "w-80"} bg-surface-container-lowest border border-outline-variant/30 rounded-2xl shadow-xl z-50 overflow-hidden animate-fade flex flex-col max-h-[450px]`}>
+      <div className="p-4 border-b border-outline-variant/20 bg-surface-container/20 flex justify-between items-center shrink-0">
+        <h3 className="font-bold text-sm text-on-surface">Notifications</h3>
+        {notifications.length > 0 && (
+          <button 
+            onClick={handleMarkAllRead}
+            className="text-xs text-primary font-bold hover:underline"
+          >
+            Clear all
+          </button>
+        )}
+      </div>
+
+      <div className="flex-1 overflow-y-auto divide-y divide-outline-variant/10">
+        {/* Pinned next class */}
+        {nextClass && (
+          <div className="p-3.5 bg-primary/5 border-b border-primary/10">
+            <div className="flex gap-2 items-center text-primary text-xs font-bold uppercase tracking-wider mb-1">
+              <span className="material-symbols-outlined text-[16px]">school</span>
+              Upcoming Class
+            </div>
+            <p className="font-bold text-sm text-on-surface">{nextClass.subject}</p>
+            <div className="flex items-center gap-2 mt-1.5 text-xs text-outline font-medium">
+              <span className="flex items-center gap-0.5"><span className="material-symbols-outlined text-[14px]">schedule</span>{nextClass.time}</span>
+              <span>•</span>
+              <span className="flex items-center gap-0.5"><span className="material-symbols-outlined text-[14px]">meeting_room</span>{nextClass.room}</span>
+            </div>
+          </div>
+        )}
+
+        {notifications.length === 0 ? (
+          <div className="p-8 text-center text-outline">
+            <span className="material-symbols-outlined text-[32px] text-outline-variant mb-1.5">notifications_off</span>
+            <p className="text-xs font-medium">All caught up!</p>
+          </div>
+        ) : (
+          notifications.map((notif) => (
+            <div 
+              key={notif.id} 
+              onClick={() => handleMarkRead(notif.id)}
+              className="p-3.5 hover:bg-surface-container/30 transition-colors cursor-pointer text-left"
+            >
+              <p className="font-bold text-xs text-on-surface">{notif.title}</p>
+              <p className="text-xs text-on-surface-variant mt-0.5 leading-relaxed">{notif.message}</p>
+              <span className="text-[10px] text-outline mt-1.5 block">
+                {new Date(notif.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" })}
+              </span>
+            </div>
+          ))
+        )}
+      </div>
+    </div>
+  );
+
   return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-surface dark:bg-surface">
+    <div className="flex flex-col md:flex-row min-h-screen bg-surface">
       <StudentNav collapsed={collapsed} onToggle={() => setCollapsed((c) => !c)} />
 
       <main className="flex-1 flex flex-col pb-16 md:pb-0 min-h-screen overflow-y-auto">
@@ -144,11 +199,11 @@ export default function StudentLayout({ children }: { children: React.ReactNode 
         )}
 
         {/* ── Mobile Top Bar ── */}
-        <header className="md:hidden bg-white dark:bg-surface-container-lowest border-b border-outline-variant/30 flex items-center px-4 h-14 sticky top-0 z-40">
-          <div className="flex-1 flex items-center gap-2">
+        <header className="md:hidden bg-surface-container-lowest border-b border-outline-variant/30 flex items-center px-4 h-14 sticky top-0 z-40">
+          <Link href="/dashboard" className="flex-1 flex items-center gap-2 hover:opacity-80 transition-opacity">
             <span className="material-symbols-outlined ms-fill text-primary text-[22px]">explore</span>
             <span className="font-headline font-bold text-on-surface text-[18px]">SCNavi</span>
-          </div>
+          </Link>
           <div className="flex items-center gap-3">
             <div className="relative">
               <button 
@@ -162,6 +217,7 @@ export default function StudentLayout({ children }: { children: React.ReactNode 
                   </span>
                 )}
               </button>
+              {notifOpen && renderNotifDropdown(true)}
             </div>
             
             <Link href="/profile" className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold shrink-0">
@@ -171,7 +227,7 @@ export default function StudentLayout({ children }: { children: React.ReactNode 
         </header>
 
         {/* ── Desktop Top Bar ── */}
-        <header className="hidden md:flex bg-white/90 dark:bg-surface-container-lowest/90 backdrop-blur-md border-b border-outline-variant/30 px-6 py-0 h-16 items-center justify-between sticky top-0 z-40">
+        <header className="hidden md:flex bg-surface-container-lowest/90 backdrop-blur-md border-b border-outline-variant/30 px-6 py-0 h-16 items-center justify-between sticky top-0 z-40">
           <div className="flex items-center gap-3">
             <h2 className="font-semibold text-[17px] text-on-surface">Student Portal</h2>
           </div>
@@ -188,60 +244,7 @@ export default function StudentLayout({ children }: { children: React.ReactNode 
             </button>
 
             {/* Dropdown Card */}
-            {notifOpen && (
-              <div className="absolute right-0 top-12 w-80 bg-white border border-outline-variant/30 rounded-2xl shadow-xl z-50 overflow-hidden animate-fade flex flex-col max-h-[450px]">
-                <div className="p-4 border-b border-outline-variant/20 bg-surface-container/20 flex justify-between items-center shrink-0">
-                  <h3 className="font-bold text-sm text-on-surface">Notifications</h3>
-                  {notifications.length > 0 && (
-                    <button 
-                      onClick={handleMarkAllRead}
-                      className="text-xs text-primary font-bold hover:underline"
-                    >
-                      Clear all
-                    </button>
-                  )}
-                </div>
-
-                <div className="flex-1 overflow-y-auto divide-y divide-outline-variant/10">
-                  {/* Pinned next class */}
-                  {nextClass && (
-                    <div className="p-3.5 bg-primary/5 border-b border-primary/10">
-                      <div className="flex gap-2 items-center text-primary text-xs font-bold uppercase tracking-wider mb-1">
-                        <span className="material-symbols-outlined text-[16px]">school</span>
-                        Upcoming Class
-                      </div>
-                      <p className="font-bold text-sm text-on-surface">{nextClass.subject}</p>
-                      <div className="flex items-center gap-2 mt-1.5 text-xs text-outline font-medium">
-                        <span className="flex items-center gap-0.5"><span className="material-symbols-outlined text-[14px]">schedule</span>{nextClass.time}</span>
-                        <span>•</span>
-                        <span className="flex items-center gap-0.5"><span className="material-symbols-outlined text-[14px]">meeting_room</span>{nextClass.room}</span>
-                      </div>
-                    </div>
-                  )}
-
-                  {notifications.length === 0 ? (
-                    <div className="p-8 text-center text-outline">
-                      <span className="material-symbols-outlined text-[32px] text-outline-variant mb-1.5">notifications_off</span>
-                      <p className="text-xs font-medium">All caught up!</p>
-                    </div>
-                  ) : (
-                    notifications.map((notif) => (
-                      <div 
-                        key={notif.id} 
-                        onClick={() => handleMarkRead(notif.id)}
-                        className="p-3.5 hover:bg-surface-container/30 transition-colors cursor-pointer text-left"
-                      >
-                        <p className="font-bold text-xs text-on-surface">{notif.title}</p>
-                        <p className="text-xs text-on-surface-variant mt-0.5 leading-relaxed">{notif.message}</p>
-                        <span className="text-[10px] text-outline mt-1.5 block">
-                          {new Date(notif.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" })}
-                        </span>
-                      </div>
-                    ))
-                  )}
-                </div>
-              </div>
-            )}
+            {notifOpen && renderNotifDropdown(false)}
 
             {/* User pill */}
             <Link 
