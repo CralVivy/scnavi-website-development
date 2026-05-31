@@ -153,7 +153,7 @@ export default function StudentLoginPage() {
           <p className="text-on-surface-variant mb-10">Use your university email to access the portal.</p>
  
           {error && (
-            <div className="bg-room-red/10 border border-room-red/20 text-room-red px-4 py-3 rounded-xl mb-6 text-sm font-medium leading-snug">
+            <div className="bg-room-red/10 border border-room-red/20 text-room-red px-4 py-3 rounded-xl mb-6 text-sm font-medium leading-snug" role="alert" aria-live="assertive">
               {error}
             </div>
           )}
@@ -167,6 +167,7 @@ export default function StudentLoginPage() {
               onChange={(e) => setEmail(e.target.value)}
               disabled={loading}
               required 
+              autoComplete="email"
             />
             
             <div className="flex flex-col gap-1.5">
@@ -178,6 +179,7 @@ export default function StudentLoginPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 disabled={loading}
                 required 
+                autoComplete="current-password"
               />
               <div className="text-right">
                 <Link href="#" className="text-sm font-bold text-accent hover:underline">Forgot Password?</Link>

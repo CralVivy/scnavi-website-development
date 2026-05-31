@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
@@ -6,6 +7,7 @@ import { LandingHeaderAuth } from "@/components/layout/LandingHeaderAuth";
 import { LandingHeroCTA } from "@/components/layout/LandingHeroCTA";
 
 export default function LandingPage() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
     <div className="min-h-screen bg-surface flex flex-col relative overflow-hidden">
       {/* Top Navigation */}
@@ -19,17 +21,38 @@ export default function LandingPage() {
               SCNavi
             </span>
           </Link>
-          <nav className="hidden md:flex items-center gap-8 font-medium text-on-surface-variant">
+          <nav className="hidden md:flex items-center gap-8 font-medium text-on-surface-variant" aria-label="Main navigation">
             <Link href="#features" className="hover:text-primary transition-colors">Features</Link>
             <Link href="#solutions" className="hover:text-primary transition-colors">Solutions</Link>
             <Link href="/admin/login" className="hover:text-primary transition-colors">Admin Portal</Link>
           </nav>
-          <LandingHeaderAuth />
+          <div className="flex items-center gap-4">
+            <LandingHeaderAuth />
+            {/* Mobile Hamburger Menu Toggle */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden flex items-center justify-center w-12 h-12 rounded-xl bg-surface-container hover:bg-surface-container-high transition-colors"
+              aria-expanded={mobileMenuOpen}
+              aria-label="Toggle mobile menu"
+            >
+              <span className="material-symbols-outlined text-[24px] text-on-surface">
+                {mobileMenuOpen ? "close" : "menu"}
+              </span>
+            </button>
+          </div>
         </div>
+        {/* Mobile Navigation Menu */}
+        {mobileMenuOpen && (
+          <nav className="md:hidden bg-surface-container-lowest border-b border-outline-variant/30 flex flex-col px-6 py-4 gap-4" aria-label="Mobile navigation">
+            <Link href="#features" onClick={() => setMobileMenuOpen(false)} className="text-on-surface font-medium hover:text-primary transition-colors">Features</Link>
+            <Link href="#solutions" onClick={() => setMobileMenuOpen(false)} className="text-on-surface font-medium hover:text-primary transition-colors">Solutions</Link>
+            <Link href="/admin/login" onClick={() => setMobileMenuOpen(false)} className="text-on-surface font-medium hover:text-primary transition-colors">Admin Portal</Link>
+          </nav>
+        )}
       </header>
 
       {/* Hero Section with Background Image */}
-      <main className="flex-1 flex flex-col relative z-10">
+      <main id="main-content" className="flex-1 flex flex-col relative z-10">
         <section className="w-full relative flex flex-col items-center justify-center py-32 md:py-48 px-6 text-center min-h-[85vh]">
           {/* Background Image & Light Overlay */}
           <div className="absolute inset-0 z-0 overflow-hidden">
@@ -39,6 +62,7 @@ export default function LandingPage() {
               fill
               className="object-cover object-center"
               priority
+              fetchPriority="high"
             />
             {/* Light gradient overlay — white wash fading to surface */}
             <div className="absolute inset-0 bg-gradient-to-b from-surface-container-lowest/90 via-surface-container-lowest/75 to-surface/95"></div>
@@ -72,23 +96,35 @@ export default function LandingPage() {
         <section className="w-full max-w-6xl mx-auto px-6 pb-24">
           <div className="w-full aspect-video bg-surface-container-low rounded-3xl border border-outline-variant/30 shadow-2xl overflow-hidden flex items-center justify-center relative">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5"></div>
-            {/* Minimal mockup representation */}
-            <div className="w-3/4 h-3/4 bg-surface-container-lowest rounded-xl shadow-card border border-outline-variant/20 flex flex-col overflow-hidden relative z-10">
-              <div className="h-12 border-b border-outline-variant/20 flex items-center px-4 gap-2">
-                <div className="w-3 h-3 rounded-full bg-room-red"></div>
-                <div className="w-3 h-3 rounded-full bg-room-yellow"></div>
-                <div className="w-3 h-3 rounded-full bg-room-green"></div>
-              </div>
-              <div className="flex-1 p-8 grid grid-cols-3 gap-6">
-                <div className="col-span-1 space-y-4">
-                  <div className="h-8 bg-surface-container rounded-lg w-3/4"></div>
-                  <div className="h-32 bg-surface-container-low rounded-lg w-full"></div>
-                  <div className="h-24 bg-surface-container-low rounded-lg w-full"></div>
-                </div>
-                <div className="col-span-2 bg-surface-container-low rounded-lg w-full h-full flex items-center justify-center">
-                  <span className="material-symbols-outlined text-[64px] text-outline-variant/50">map</span>
-                </div>
-              </div>
+            {/* Polished SVG Illustration Representation */}
+            <div className="w-4/5 h-4/5 flex items-center justify-center relative z-10">
+              <svg width="100%" height="100%" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {/* Dashboard Card Background */}
+                <rect x="50" y="50" width="700" height="400" rx="24" fill="var(--color-surface-container-lowest)" stroke="var(--color-outline-variant)" strokeOpacity="0.3" strokeWidth="2" className="shadow-2xl"/>
+                
+                {/* Header elements */}
+                <rect x="90" y="90" width="180" height="24" rx="12" fill="var(--color-primary)" fillOpacity="0.1"/>
+                <rect x="90" y="130" width="120" height="16" rx="8" fill="var(--color-outline-variant)" fillOpacity="0.4"/>
+                
+                <circle cx="700" cy="100" r="20" fill="var(--color-primary)"/>
+                
+                {/* Main Content Areas */}
+                <rect x="90" y="180" width="300" height="230" rx="16" fill="var(--color-surface-container-low)"/>
+                <rect x="410" y="180" width="340" height="230" rx="16" fill="var(--color-primary)" fillOpacity="0.05"/>
+                
+                {/* Map/Path visualization in right card */}
+                <path d="M460 250 Q 500 200, 580 250 T 700 220" stroke="var(--color-primary)" strokeWidth="6" strokeLinecap="round" strokeDasharray="10 10"/>
+                <circle cx="460" cy="250" r="10" fill="var(--color-primary)"/>
+                <circle cx="700" cy="220" r="10" fill="var(--color-accent)"/>
+                <circle cx="700" cy="220" r="4" fill="white"/>
+                
+                {/* Content lines in left card */}
+                <rect x="120" y="220" width="240" height="12" rx="6" fill="var(--color-outline-variant)" fillOpacity="0.5"/>
+                <rect x="120" y="250" width="200" height="12" rx="6" fill="var(--color-outline-variant)" fillOpacity="0.3"/>
+                <rect x="120" y="280" width="220" height="12" rx="6" fill="var(--color-outline-variant)" fillOpacity="0.3"/>
+                
+                <rect x="120" y="340" width="140" height="36" rx="18" fill="var(--color-primary)"/>
+              </svg>
             </div>
           </div>
         </section>
@@ -131,13 +167,47 @@ export default function LandingPage() {
       </main>
 
       {/* Footer */}
-      <footer className="w-full bg-sidebar py-12 px-6 text-slate-400">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between">
-          <div className="flex items-center gap-2 mb-4 md:mb-0">
-            <span className="material-symbols-outlined ms-fill text-white text-[24px]">explore</span>
-            <span className="font-headline font-bold text-white text-[20px]">SCNavi</span>
+      <footer className="w-full bg-sidebar py-16 px-6 text-slate-400">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start justify-between gap-12">
+          <div className="flex flex-col gap-4 max-w-sm">
+            <div className="flex items-center gap-2">
+              <span className="material-symbols-outlined ms-fill text-primary text-[32px]">explore</span>
+              <span className="font-headline font-bold text-white text-[28px]">SCNavi</span>
+            </div>
+            <p className="text-sm leading-relaxed">
+              The premier smart campus navigation system designed specifically for Bicol University students and faculty.
+            </p>
           </div>
-          <p className="text-sm">© 2026 Bicol University · Blockers United. All rights reserved.</p>
+          
+          <div className="flex flex-wrap gap-12 md:gap-24">
+            <div className="flex flex-col gap-4">
+              <h4 className="text-white font-bold text-sm uppercase tracking-wider">Navigation</h4>
+              <Link href="#features" className="text-sm hover:text-white transition-colors">Features</Link>
+              <Link href="#solutions" className="text-sm hover:text-white transition-colors">Solutions</Link>
+              <Link href="/login" className="text-sm hover:text-white transition-colors">Student Login</Link>
+              <Link href="/admin/login" className="text-sm hover:text-white transition-colors">Admin Portal</Link>
+            </div>
+            
+            <div className="flex flex-col gap-4">
+              <h4 className="text-white font-bold text-sm uppercase tracking-wider">Legal</h4>
+              <Link href="#" className="text-sm hover:text-white transition-colors">Privacy Policy</Link>
+              <Link href="#" className="text-sm hover:text-white transition-colors">Terms of Service</Link>
+              <Link href="#" className="text-sm hover:text-white transition-colors">Accessibility</Link>
+            </div>
+            
+            <div className="flex flex-col gap-4">
+              <h4 className="text-white font-bold text-sm uppercase tracking-wider">Contact</h4>
+              <a href="mailto:support@bicol-u.edu.ph" className="text-sm hover:text-white transition-colors">support@bicol-u.edu.ph</a>
+              <p className="text-sm">Legazpi City, Albay, Philippines</p>
+            </div>
+          </div>
+        </div>
+        
+        <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-slate-700/50 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-xs">© 2026 Bicol University · Blockers United. All rights reserved.</p>
+          <div className="flex items-center gap-4 text-xs">
+            <span>Powered by Next.js & Firebase</span>
+          </div>
         </div>
       </footer>
     </div>

@@ -151,7 +151,7 @@ export default function RegisterPage() {
         </div>
 
         {error && (
-          <div className="bg-room-red/10 border border-room-red/20 text-room-red px-4 py-3 rounded-xl mb-6 text-sm font-medium leading-snug">
+          <div className="bg-room-red/10 border border-room-red/20 text-room-red px-4 py-3 rounded-xl mb-6 text-sm font-medium leading-snug" role="alert" aria-live="assertive">
             {error}
           </div>
         )}
@@ -163,7 +163,7 @@ export default function RegisterPage() {
         )}
 
         <form onSubmit={handleRegister} className="flex flex-col gap-5">
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-4">
             <Input 
               label="First Name" 
               placeholder="Juan" 
@@ -171,6 +171,7 @@ export default function RegisterPage() {
               value={formData.firstName}
               onChange={(e) => setFormData({...formData, firstName: e.target.value})}
               disabled={loading}
+              autoComplete="given-name"
             />
             <Input 
               label="Last Name" 
@@ -179,6 +180,7 @@ export default function RegisterPage() {
               value={formData.lastName}
               onChange={(e) => setFormData({...formData, lastName: e.target.value})}
               disabled={loading}
+              autoComplete="family-name"
             />
           </div>
           
@@ -190,6 +192,7 @@ export default function RegisterPage() {
             value={formData.email}
             onChange={(e) => setFormData({...formData, email: e.target.value})}
             disabled={loading}
+            autoComplete="email"
           />
           
           <Input 
@@ -210,6 +213,7 @@ export default function RegisterPage() {
             onChange={(e) => setFormData({...formData, password: e.target.value})}
             minLength={6}
             disabled={loading}
+            autoComplete="new-password"
           />
 
           <Button type="submit" size="lg" className="w-full mt-4" disabled={loading}>

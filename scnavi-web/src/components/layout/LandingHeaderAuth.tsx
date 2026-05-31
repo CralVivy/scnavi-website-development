@@ -68,6 +68,9 @@ export function LandingHeaderAuth() {
       <button
         onClick={() => setDropdownOpen(!dropdownOpen)}
         className="flex items-center gap-2.5 bg-surface-container hover:bg-surface-container-high transition-colors rounded-full pl-1 pr-4 py-1 cursor-pointer border border-outline-variant/20"
+        aria-expanded={dropdownOpen}
+        aria-haspopup="true"
+        aria-label="User profile menu"
       >
         <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold shrink-0">
           {initials}
@@ -116,6 +119,7 @@ export function LandingHeaderAuth() {
                 setTheme(theme === "dark" ? "light" : "dark");
               }}
               className="w-full flex items-center justify-between px-4 py-3 hover:bg-surface-container/30 transition-colors text-sm font-medium text-on-surface text-left"
+              aria-label="Toggle dark mode"
             >
               <div className="flex items-center gap-3">
                 <span className="material-symbols-outlined text-[20px] text-on-surface-variant">

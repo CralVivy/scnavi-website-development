@@ -27,7 +27,7 @@
   --color-sidebar: #0f172a;
   --color-sidebar-active: #1e293b;
 
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-headline: var(--font-newsreader), ui-serif, Georgia, serif;
 }
 
@@ -87,3 +87,13 @@ body {
   from { opacity: 0; }
   to   { opacity: 1; }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+

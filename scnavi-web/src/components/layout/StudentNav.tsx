@@ -148,6 +148,7 @@ export function StudentNav({ collapsed, onToggle }: StudentNavProps) {
                 onClick={onToggle}
                 className="w-7 h-7 rounded-lg flex items-center justify-center hover:bg-surface-container transition-colors shrink-0"
                 title="Collapse sidebar"
+                aria-label="Collapse sidebar"
               >
                 <span className="material-symbols-outlined text-[18px] text-outline">chevron_left</span>
               </button>
@@ -158,6 +159,7 @@ export function StudentNav({ collapsed, onToggle }: StudentNavProps) {
               onClick={onToggle}
               className="w-7 h-7 rounded-lg flex items-center justify-center hover:bg-surface-container transition-colors shrink-0 mt-2"
               title="Expand sidebar"
+              aria-label="Expand sidebar"
             >
               <span className="material-symbols-outlined text-[18px] text-outline">chevron_right</span>
             </button>
@@ -165,7 +167,7 @@ export function StudentNav({ collapsed, onToggle }: StudentNavProps) {
         </div>
 
         {/* Nav items */}
-        <nav className="flex-1 p-3 space-y-1 overflow-hidden">
+        <nav className="flex-1 p-3 space-y-1 overflow-hidden" aria-label="Sidebar navigation">
           {navItems.map((item) => {
             const isActive = pathname === item.href || (item.href !== "/dashboard" && pathname.startsWith(item.href));
             return (
@@ -178,6 +180,7 @@ export function StudentNav({ collapsed, onToggle }: StudentNavProps) {
                     ? "bg-primary text-white shadow-md"
                     : "text-on-surface-variant hover:bg-surface-container hover:text-on-surface"
                 } ${collapsed ? "justify-center" : ""}`}
+                aria-current={isActive ? "page" : undefined}
               >
                 <span className={`material-symbols-outlined text-[22px] shrink-0 ${isActive ? "ms-fill" : ""}`}>
                   {item.icon}
@@ -190,7 +193,7 @@ export function StudentNav({ collapsed, onToggle }: StudentNavProps) {
       </aside>
 
       {/* ── Mobile Bottom Nav ── */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-surface-container-lowest border-t border-outline-variant/30 flex items-center h-16 px-1">
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-surface-container-lowest border-t border-outline-variant/30 flex items-center h-16 px-1" aria-label="Mobile navigation">
         {navItems.map((item) => {
           const isActive = pathname === item.href || (item.href !== "/dashboard" && pathname.startsWith(item.href));
           return (
@@ -198,11 +201,12 @@ export function StudentNav({ collapsed, onToggle }: StudentNavProps) {
               key={item.name}
               href={item.href}
               className={`flex flex-col items-center justify-center flex-1 py-2 transition-colors ${isActive ? "text-primary" : "text-inactive"}`}
+              aria-current={isActive ? "page" : undefined}
             >
               <span className={`material-symbols-outlined text-[24px] ${isActive ? "ms-fill" : ""}`}>
                 {item.icon}
               </span>
-              <span className="text-[10px] font-medium mt-0.5">{item.name}</span>
+              <span className="text-xs font-medium mt-0.5">{item.name}</span>
             </Link>
           );
         })}
