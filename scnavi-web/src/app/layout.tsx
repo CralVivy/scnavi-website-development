@@ -30,6 +30,12 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        {/* Synchronous dark mode script — runs before first paint to eliminate FOUC */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('scnavi-theme');var d=window.matchMedia('(prefers-color-scheme:dark)').matches;if(t==='dark'||(t==='system'||!t)&&d){document.documentElement.classList.add('dark');}}catch(e){}})();`,
+          }}
+        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>

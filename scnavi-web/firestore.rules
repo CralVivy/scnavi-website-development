@@ -5,7 +5,12 @@ service cloud.firestore {
     // ── Helper Functions ──────────────────────────────────────
     function isAuthenticated() { return request.auth != null; }
     // ZERO-READ Custom Claim check! No get() document reads required.
-    function isAdmin()         { return isAuthenticated() && request.auth.token.admin == true; }
+    function isAdmin() { 
+      return isAuthenticated() && (
+        request.auth.token.admin == true ||
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin'
+      );
+    }
     
     // ── Users ─────────────────────────────────────────────────
     match /users/{userId} {
@@ -43,12 +48,18 @@ service cloud.firestore {
            allow write: if isAdmin();
         }
       }
+      
+      // Room Statuses
+      match /roomStatuses/{floorId} {
+        allow read: if isAuthenticated();
+        allow write: if isAdmin();
+      }
     }
 
     // ── Notifications ─────────────────────────────────────────
     match /notifications/{notificationId} {
-      // Users can only read their own notifications
-      allow read: if isAuthenticated() && request.auth.uid == resource.data.uid;
+      // Users can only read their own notifications, Admins can read all
+      allow read: if isAuthenticated() && (request.auth.uid == resource.data.uid || isAdmin());
       allow create: if isAuthenticated() && (request.auth.uid == request.resource.data.uid || isAdmin());
       // Users can only update their own notifications' `read` status
       allow update: if isAuthenticated() && request.auth.uid == resource.data.uid && 
@@ -64,7 +75,10 @@ service cloud.firestore {
 
     match /feedback/{feedbackId} {
       allow read: if isAdmin();
-      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      allow create: if isAuthenticated() && (
+        request.resource.data.uid == request.auth.uid ||
+        request.resource.data.userId == request.auth.uid
+      );
       allow update, delete: if isAdmin();
     }
   }

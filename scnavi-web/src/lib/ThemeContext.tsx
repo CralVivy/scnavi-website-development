@@ -16,25 +16,19 @@ const ThemeContext = createContext<ThemeContextType>({
 });
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>("system");
+  // Initialize directly from localStorage so state is correct on first render
+  const [theme, setThemeState] = useState<Theme>(() => {
+    if (typeof window === "undefined") return "system";
+    return (localStorage.getItem("scnavi-theme") as Theme) || "system";
+  });
   const [resolvedTheme, setResolvedTheme] = useState<"light" | "dark">("light");
 
-  // On mount, load persisted theme from localStorage
-  useEffect(() => {
-    const saved = (localStorage.getItem("scnavi-theme") as Theme) || "system";
-    setThemeState(saved);
-  }, []);
-
-  // Whenever theme changes, apply .dark class and persist
+  // Single effect: apply class + listen for system changes
   useEffect(() => {
     const root = document.documentElement;
 
     const applyTheme = (resolved: "light" | "dark") => {
-      if (resolved === "dark") {
-        root.classList.add("dark");
-      } else {
-        root.classList.remove("dark");
-      }
+      root.classList.toggle("dark", resolved === "dark");
       setResolvedTheme(resolved);
     };
 
@@ -47,8 +41,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     } else {
       applyTheme(theme);
     }
-
-    localStorage.setItem("scnavi-theme", theme);
   }, [theme]);
 
   const setTheme = (t: Theme) => {

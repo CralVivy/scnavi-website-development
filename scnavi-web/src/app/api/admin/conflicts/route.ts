@@ -107,10 +107,10 @@ export async function GET(request: Request) {
               const [start1Str, end1Str] = e1.time.split("-").map(t => t.trim());
               const [start2Str, end2Str] = e2.time.split("-").map(t => t.trim());
               
-              const start1 = parse(start1Str, 'hh:mm a', baseDate);
-              const end1 = parse(end1Str, 'hh:mm a', baseDate);
-              const start2 = parse(start2Str, 'hh:mm a', baseDate);
-              const end2 = parse(end2Str, 'hh:mm a', baseDate);
+              const start1 = parse(start1Str.toUpperCase(), 'hh:mm a', baseDate);
+              const end1 = parse(end1Str.toUpperCase(), 'hh:mm a', baseDate);
+              const start2 = parse(start2Str.toUpperCase(), 'hh:mm a', baseDate);
+              const end2 = parse(end2Str.toUpperCase(), 'hh:mm a', baseDate);
 
               // Overlap condition: start1 < end2 && end1 > start2
               if (isBefore(start1, end2) && isAfter(end1, start2)) {

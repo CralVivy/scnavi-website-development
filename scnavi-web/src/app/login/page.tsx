@@ -6,13 +6,11 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { auth, db, googleProvider } from "@/lib/firebase";
-import { signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { signInWithPopup, signOut } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 
 export default function StudentLoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -31,27 +29,7 @@ export default function StudentLoginPage() {
     return error.message || "Failed to sign in. Please check your details.";
   };
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError("");
 
-    // Enforce BU email constraint
-    if (!email.endsWith("@bicol-u.edu.ph")) {
-      setError("Login Restricted: Only Bicol University email addresses (@bicol-u.edu.ph) are permitted.");
-      setLoading(false);
-      return;
-    }
-
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      router.push("/dashboard");
-    } catch (err: any) {
-      setError(getFriendlyErrorMessage(err));
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleGoogleSignIn = async () => {
     setLoading(true);
@@ -127,9 +105,10 @@ export default function StudentLoginPage() {
           <span className="font-headline font-bold text-on-surface text-[24px]">SCNavi</span>
         </Link>
  
-        <div className="relative z-10 max-w-md">
-          <h1 className="font-headline font-bold text-[48px] leading-tight text-on-surface mb-6">
-            Welcome back to your smart campus.
+        <div className="relative z-10 max-w-lg">
+          <h1 className="font-headline font-extrabold text-[36px] sm:text-[44px] md:text-[48px] leading-[1.1] tracking-tight mb-6">
+            <span className="block text-primary">Welcome back to your</span>
+            <span className="block text-accent">Smart Campus.</span>
           </h1>
           <p className="text-lg text-on-surface-variant">
             Sign in to check your personalized schedule, find your next class, and navigate the university with ease.
@@ -157,48 +136,6 @@ export default function StudentLoginPage() {
               {error}
             </div>
           )}
- 
-          <form className="flex flex-col gap-6 mb-6" onSubmit={handleLogin}>
-            <Input 
-              type="email" 
-              placeholder="e.g. juan.delacruz@bicol-u.edu.ph" 
-              label="University Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              disabled={loading}
-              required 
-              autoComplete="email"
-            />
-            
-            <div className="flex flex-col gap-1.5">
-              <Input 
-                type="password" 
-                placeholder="••••••••" 
-                label="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                disabled={loading}
-                required 
-                autoComplete="current-password"
-              />
-              <div className="text-right">
-                <Link href="#" className="text-sm font-bold text-accent hover:underline">Forgot Password?</Link>
-              </div>
-            </div>
- 
-            <Button type="submit" size="lg" className="mt-2 w-full" disabled={loading}>
-              {loading ? "Signing In..." : "Sign In"}
-            </Button>
-          </form>
-
-          <div className="relative my-4">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t border-outline-variant/30"></span>
-            </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-surface-container-lowest px-2 text-outline font-semibold">Or continue with</span>
-            </div>
-          </div>
 
           <Button 
             type="button" 

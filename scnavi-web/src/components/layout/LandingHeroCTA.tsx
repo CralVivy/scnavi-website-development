@@ -20,21 +20,9 @@ export function LandingHeroCTA() {
   if (!user) {
     return (
       <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
-        <Link href="/register" className="w-full sm:w-auto">
-          <Button
-            size="lg"
-            className="w-full sm:w-auto shadow-xl shadow-primary/20 text-lg px-8"
-          >
-            Create an Account
-          </Button>
-        </Link>
         <Link href="/login" className="w-full sm:w-auto">
-          <Button
-            variant="outline"
-            size="lg"
-            className="w-full sm:w-auto bg-surface-container-lowest"
-          >
-            Student Login
+          <Button size="lg" className="w-full sm:w-auto shadow-xl shadow-primary/20 text-lg px-10">
+            Log In
           </Button>
         </Link>
       </div>
@@ -43,7 +31,7 @@ export function LandingHeroCTA() {
 
   const role = profile?.role || "student";
   const portalRoute = role === "admin" ? "/admin/dashboard" : "/dashboard";
-  const portalText = role === "admin" ? "Enter Admin Portal" : "Enter Student Portal";
+  const portalText = role === "admin" ? "Enter SCNavi Portal" : "Enter Student Portal";
 
   return (
     <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">

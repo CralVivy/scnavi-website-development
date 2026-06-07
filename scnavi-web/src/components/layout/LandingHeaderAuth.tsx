@@ -41,9 +41,6 @@ export function LandingHeaderAuth() {
             Log In
           </Button>
         </Link>
-        <Link href="/register">
-          <Button className="text-sm sm:text-base">Get Started</Button>
-        </Link>
       </div>
     );
   }
@@ -72,8 +69,8 @@ export function LandingHeaderAuth() {
         aria-haspopup="true"
         aria-label="User profile menu"
       >
-        <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold shrink-0">
-          {initials}
+        <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold shrink-0 overflow-hidden">
+          {profile?.photoURL ? <img src={profile.photoURL} alt="Avatar" className="w-full h-full object-cover" /> : initials}
         </div>
         <div className="hidden lg:block leading-tight text-left">
           <p className="text-sm font-semibold text-on-surface">{displayName}</p>
