@@ -33,7 +33,7 @@ const STATUS_CONFIG: Record<string, { label: string; color: string; dot: string 
 
 export default function MapPage() {
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "";
-  const buCenter = { lat: 13.1415, lng: 123.7317 };
+  const buCenter = { lat: 13.2964, lng: 123.4839 };
   
   const [buildings, setBuildings] = useState<Building[]>([]);
   const [selectedBuilding, setSelectedBuilding] = useState<Building | null>(null);

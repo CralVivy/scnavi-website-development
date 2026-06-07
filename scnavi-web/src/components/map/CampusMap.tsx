@@ -17,8 +17,8 @@ export function CampusMap() {
   const [buildings, setBuildings] = useState<Building[]>([]);
   const [isMounted, setIsMounted] = useState(false);
   
-  // Coordinates for Bicol University Main Campus
-  const buCenter = { lat: 13.1415, lng: 123.7317 };
+  // Coordinates for Bicol University Polangui Campus
+  const buCenter = { lat: 13.2964, lng: 123.4839 };
 
   useEffect(() => {
     setIsMounted(true);

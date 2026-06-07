@@ -12,12 +12,35 @@ import { ThemeSettings } from "@/components/ui/ThemeSettings";
 
 export default function ProfilePage() {
   const PREMADE_AVATARS = [
+    // Notionists (diverse people & backgrounds)
     "https://api.dicebear.com/7.x/notionists/svg?seed=Felix&backgroundColor=b6e3f4",
     "https://api.dicebear.com/7.x/notionists/svg?seed=Aneka&backgroundColor=c0aede",
     "https://api.dicebear.com/7.x/notionists/svg?seed=Milo&backgroundColor=ffd5dc",
     "https://api.dicebear.com/7.x/notionists/svg?seed=Jude&backgroundColor=ffdfbf",
     "https://api.dicebear.com/7.x/notionists/svg?seed=Leo&backgroundColor=d1d4f9",
     "https://api.dicebear.com/7.x/notionists/svg?seed=Jack&backgroundColor=c0aede",
+    "https://api.dicebear.com/7.x/notionists/svg?seed=Nala&backgroundColor=ffd5dc",
+    "https://api.dicebear.com/7.x/notionists/svg?seed=Zoe&backgroundColor=ffdfbf",
+    "https://api.dicebear.com/7.x/notionists/svg?seed=Kofi&backgroundColor=b6e3f4",
+    
+    // Personas & Adventurer (highly diverse skin colors, hair styles and genders)
+    "https://api.dicebear.com/7.x/personas/svg?seed=Aria&backgroundColor=ffdfbf",
+    "https://api.dicebear.com/7.x/personas/svg?seed=Caleb&backgroundColor=d1d4f9",
+    "https://api.dicebear.com/7.x/personas/svg?seed=Jordan&backgroundColor=b6e3f4",
+    "https://api.dicebear.com/7.x/personas/svg?seed=Yuki&backgroundColor=c0aede",
+    "https://api.dicebear.com/7.x/adventurer/svg?seed=Lulu&backgroundColor=ffd5dc",
+    "https://api.dicebear.com/7.x/adventurer/svg?seed=Scooter&backgroundColor=ffdfbf",
+    "https://api.dicebear.com/7.x/adventurer/svg?seed=Patches&backgroundColor=d1d4f9",
+    "https://api.dicebear.com/7.x/adventurer/svg?seed=Garfield&backgroundColor=b6e3f4",
+    
+    // Cute Animals (high quality square-cropped profile photography)
+    "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=150&h=150&fit=crop&crop=face&q=80", // Cat
+    "https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=150&h=150&fit=crop&crop=face&q=80", // Golden Retriever
+    "https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?w=150&h=150&fit=crop&crop=face&q=80", // Bunny
+    "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=150&h=150&fit=crop&crop=face&q=80", // Fox
+    "https://images.unsplash.com/photo-1552053831-71594a27632d?w=150&h=150&fit=crop&crop=face&q=80", // Golden Retriever Puppy
+    "https://images.unsplash.com/photo-1570481662006-a3a1374699e8?w=150&h=150&fit=crop&crop=face&q=80", // Koala
+    "https://images.unsplash.com/photo-1598439210625-5067c578f3f6?w=150&h=150&fit=crop&crop=face&q=80", // Red Panda
   ];
 
   const { user, profile, loading } = useAuthSession();
