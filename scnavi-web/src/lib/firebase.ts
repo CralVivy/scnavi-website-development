@@ -13,18 +13,18 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-// Initialize Firebase only once
+// Initializes Firebase only once
 const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
 
-// Initialize Auth and Firestore
+// Initializes Auth and Firestore
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// Initialize Google Auth Provider
+// Initializes Google Auth Provider
 const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({
   prompt: "select_account",
-  hd: "bicol-u.edu.ph", // Request Google to prioritize/select Bicol University emails
+  hd: "bicol-u.edu.ph", // Requests Google to prioritize/select Bicol University emails
 });
 
 // Analytics is client-side only
@@ -38,4 +38,3 @@ googleProvider.setCustomParameters({
 // }
 
 export { app, auth, db, googleProvider };
-
