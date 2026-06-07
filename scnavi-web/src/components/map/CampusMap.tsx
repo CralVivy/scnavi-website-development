@@ -15,11 +15,13 @@ export interface Building {
 export function CampusMap() {
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "";
   const [buildings, setBuildings] = useState<Building[]>([]);
+  const [isMounted, setIsMounted] = useState(false);
   
   // Coordinates for Bicol University Main Campus
   const buCenter = { lat: 13.1415, lng: 123.7317 };
 
   useEffect(() => {
+    setIsMounted(true);
     // Zero-Cost Architecture: Fetch all bundled coordinates in 1 single read!
     const fetchBuildings = async () => {
       try {
@@ -36,6 +38,15 @@ export function CampusMap() {
     };
     fetchBuildings();
   }, []);
+
+  if (!isMounted) {
+    return (
+      <div className="w-full h-full flex flex-col items-center justify-center bg-surface-container-low text-outline p-6 text-center">
+        <span className="material-symbols-outlined animate-spin text-[24px] text-primary">progress_activity</span>
+        <p className="text-xs mt-1">Loading Campus Map...</p>
+      </div>
+    );
+  }
 
   if (!apiKey) {
     return (

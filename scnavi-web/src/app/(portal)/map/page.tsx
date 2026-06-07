@@ -41,6 +41,11 @@ export default function MapPage() {
   const [loadingRooms, setLoadingRooms] = useState(false);
   const [detailTab, setDetailTab] = useState<"rooms" | "floorplan">("rooms");
   const [floorPlanElements, setFloorPlanElements] = useState<FloorPlanElement[]>([]);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // 1. Zero-Cost Map Architecture: Fetch all pins in one read
   useEffect(() => {
@@ -114,6 +119,17 @@ export default function MapPage() {
       setLoadingRooms(false);
     }
   };
+
+  if (!isMounted) {
+    return (
+      <div className="h-[calc(100vh-8rem)] flex items-center justify-center bg-surface">
+        <div className="flex flex-col items-center gap-3">
+          <span className="material-symbols-outlined animate-spin text-[32px] text-primary">progress_activity</span>
+          <p className="text-sm text-outline font-medium">Loading Campus Map...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!apiKey) {
     return (
